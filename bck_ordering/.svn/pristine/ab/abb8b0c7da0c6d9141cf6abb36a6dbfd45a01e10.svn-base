@@ -1,0 +1,464 @@
+<div class="main-content clearfix">
+    <div class="main-rgt-content clearfix">
+        <?php echo $this->Session->flash(); 
+        if(isset($avalibilty_status)){?>
+            <div class="inner-sml-form">
+                <fieldset>
+                    <legend>Store Availability</legend>
+                    <div class="availabilty-msg clearfix">
+                        <h3>Store Closed</h3>
+                        <h4> <?php if($avalibilty_status['status']=="Holiday"){?>
+                                <span><?php echo $avalibilty_status['description'];?></span>
+                            <?php }elseif($avalibilty_status['status']=="WeekDay"){?>
+                                <span><?php echo "WeekDay Off";?></span>
+                            <?php }elseif($avalibilty_status['status']=="Timeoff"){?>
+                                <span><?php echo "Please visit us between"." ".date('H:i:s',$avalibilty_status['start_time'])." ". "and"." ".date('H:i:s',$avalibilty_status['end_time']) ;?></span>
+                            <?php }?>
+                        </h4>
+                    </div>
+                </fieldset>
+            </div>
+        <?php  }else{ ?>
+            <div class="inner-sml-form online-order-frame">
+                <div class="online-order clearfix">
+                    <?php echo $this->Form->create('Users', array('inputDefaults' => array('label' => false, 'div'=>false, 'required' => false, 'error' => false, 'legend' => false,'autocomplete' => 'off'),'name'=>'Form1','id'=>'GuestDeliverOrdering','url'=>array('controller'=>'users','action'=>'guestOrdering')));?>   
+                        <fieldset class="float-left">
+                            <legend>Delivery</legend>
+                                <dl class="reg-wrap clearfix">
+                                    <dt></dt>
+                                    <dd>
+                                        <input type="radio" name="data[Order][type]"value="3" checked="checked">Delivery
+                                    </dd>
+                                    
+                                    <dt>Name on Bell</dt>
+                                    <dd>
+                                        <?php echo $this->Form->input('DeliveryAddress.name_on_bell',array('type'=>'text','class'=>'usrname-input txtbx','label'=>false,'div'=>false,'placeholder'=>'Enter Your Name'));
+                                        echo $this->Form->error('DeliveryAddress.name_on_bell');?>
+                                    </dd>
+                                    
+                                    <dt>Address</dt>
+                                    <dd>
+                                        <?php echo $this->Form->input('DeliveryAddress.address',array('type'=>'text','class'=>'usrname-input txtbx','placeholder'=>'Enter Your Address','label'=>false,'div'=>false));
+                                        echo $this->Form->error('DeliveryAddress.address');?>
+				    </dd>
+                                    
+                                    <dt>City</dt>
+                                    <dd>
+                                        <?php echo $this->Form->input('DeliveryAddress.city',array('type'=>'text','class'=>'passwrd-inputDefaults txtbx ','placeholder'=>'Enter Your City','maxlength'=>'50','label'=>false,'div'=>false));         
+                                        echo $this->Form->error('DeliveryAddress.city');?>
+				    </dd>
+                                    
+                                    <dt>State</dt>
+                                    <dd>
+                                        <?php echo $this->Form->input('DeliveryAddress.state',array('type'=>'text','class'=>'passwrd-input txtbx','placeholder'=>'Enter Your State','maxlength'=>'50','label'=>false,'div'=>false,'autocomplete' => 'off'));            
+                                        echo $this->Form->error('DeliveryAddress.state'); ?>
+				    </dd>
+                                    
+                                    <dt>Zip-Code</dt>
+                                    <dd>
+                                        <?php echo $this->Form->input('DeliveryAddress.zipcode',array('type'=>'text','class'=>'passwrd-input txtbx','placeholder'=>'Enter Your Zip-Code','maxlength'=>'6','label'=>false,'div'=>false));            
+                                        echo $this->Form->error('DeliveryAddress.zipcode');?>
+				    </dd>
+                                    
+                                    <dt>Phone Number</dt>
+                                    <dd><?php echo $this->Form->input('DeliveryAddress.phone',array('type'=>'text','class'=>'passwrd-input txtbx','placeholder'=>'Enter Your Phone Number','maxlength'=>'12','label'=>false,'div'=>false));            
+                                        echo $this->Form->error('DeliveryAddress.phone');?>
+				    </dd>
+                                    
+                                    <dt>Email</dt>
+                                    <dd><?php echo $this->Form->input('DeliveryAddress.email',array('type'=>'text','class'=>'passwrd-input txtbx','placeholder'=>'Enter Your Email','maxlength'=>'50','label'=>false,'div'=>false));            
+                                        echo $this->Form->error('DeliveryAddress.email');?>
+				    </dd>
+                                    
+                                    <dt></dt>
+                                    <dd>
+                                        <?php  echo $this->Form->radio('Delivery.type', array('0' => 'Now','1' => 'Pre-Order'), array('legend' => false,'value' => 0,'class'=>'radio-wrap'));?>
+                                    </dd>
+                                    
+                                </dl>
+				<dl class="clearfix reg-wrap delivery_pickup_time">
+				    <dt>Pick Up Time</dt>
+                                    <dd>
+                                        <?php echo $this->Form->input('Delivery.pickup_time', array('class'=>'pickup usrname-input','options' => $time_range,'empty' =>'(choose one)','label'=>false));
+                                        echo $this->Form->error('Delivery.pickup_time');  ?>
+                                    </dd>
+					
+                                    <dt>Pick Up Date</dt>
+                                    <dd>
+                                        <?php echo $this->Form->input('Delivery.pickup_date',array('type'=>'text','class'=>'passwrd-input txtbx date_select','placeholder'=>'Date','label'=>false,'div'=>false,'required'=>true,'readOnly'=>true));
+                                        echo $this->Form->error('Delivery.pickup_date');?>
+                                    </dd>
+				</dl> 
+                        </fieldset>
+                        <fieldset class="float-right">
+                           <legend>Pickup</legend>
+                                <dl class="reg-wrap clearfix">
+                                    <dt></dt>
+                                    <dd>
+                                        <input type="radio" name="data[Order][type]" value="2">PickUp
+                                    </dd>
+                                    
+                                    <dt>Name</dt>
+                                    <dd>
+                                        <?php echo $this->Form->input('PickUpAddress.name_on_bell',array('type'=>'text','class'=>'usrname-input txtbx','label'=>false,'div'=>false,'placeholder'=>'Enter Your Name'));
+                                        echo $this->Form->error('PickUpAddress.name_on_bell');?>
+                                    </dd>
+
+                                    <dt>Phone Number</dt>
+                                    <dd><?php echo $this->Form->input('PickUpAddress.phone',array('type'=>'text','class'=>'passwrd-input txtbx','placeholder'=>'Enter Your Phone Number','maxlength'=>'12','label'=>false,'div'=>false));            
+                                        echo $this->Form->error('PickUpAddress.phone');?>
+				    </dd>
+                                    
+                                    <dt>Email</dt>
+                                    <dd><?php echo $this->Form->input('PickUpAddress.email',array('type'=>'text','class'=>'passwrd-input txtbx','placeholder'=>'Enter Your Email','maxlength'=>'50','label'=>false,'div'=>false));            
+                                        echo $this->Form->error('PickUpAddress.email');?>
+				    </dd>
+                                </dl>    
+                                <address>
+                                    <strong><?php echo $store_data['Store']['store_name'];?></strong><br>
+                                    <?php echo $store_data['Store']['address'];?><br>
+                                    <?php echo $store_data['Store']['city']." ".$store_data['Store']['state']." ".$store_data['Store']['zipcode'];?><br>
+                                    <?php echo $store_data['Store']['phone'];?>
+                                </address>
+                                <dl class="clearfix reg-wrap">
+                                    <dt></dt>
+                                        <dd>
+                                        <?php if(isset($time_range)){
+                                                $options = array('0' => 'Now','1' => 'Pre-Order');
+                                                $attributes = array('legend' => false,'value' => 0);
+                                            }else{
+                                                $options = array('0' => 'Now');
+                                                $attributes = array('legend' => false,'value' => 0);
+                                            }
+                                            echo $this->Form->radio('PickUp.type', $options, $attributes);?>
+                                        </dd>
+                                </dl>
+                                <dl class="clearfix reg-wrap pickup_pickup_time">   
+				    <dt>Pick Up Time</dt>
+                                        <dd>
+                                            <?php echo $this->Form->input('PickUp.pickup_time', array('class'=>'pickup','options' => $time_ranges,'empty' =>'(choose one)','label'=>false,'type'=>'select'));
+                                            echo $this->Form->error('PickUp.pickup_time');?> 
+					</dd>
+                                        
+                                    <dt>Pick Up Date</dt>
+                                    <dd>
+                                        <?php echo $this->Form->input('PickUp.pickup_date',array('type'=>'text','class'=>'passwrd-input txtbx date_select','placeholder'=>'Date','label'=>false,'div'=>false,'required'=>true,'readOnly'=>true));
+					  echo $this->Form->error('PickUp.pickup_date'); ?>
+				    </dd>
+				</dl>
+				<dl class="clearfix reg-wrap pickup_pickup_time_now">   
+				    <dt>Pick Up Time</dt>
+                                    <dd>
+                                        <?php echo $this->Form->input('PickUp.pickup_time_now', array('class'=>'pickup','options' =>$time_range,'empty' =>'(choose one)','label'=>false));
+                                        echo $this->Form->error('PickUp.pickup_time_now'); ?>
+                                    </dd> 
+				</dl>       
+                        </fieldset>
+                    <input type="submit" value="Proceed as Guest">
+                    <?php echo $this->Form->end();?>
+                </div>
+            </div>
+        <?php }?>
+    </div>
+</div><!-- /main content end -->
+</div><!-- /right side end -->
+<div class="clearfix"></div>
+<script>
+$("#UserLoginForm").validate({
+    rules: {
+        "data[User][username]": {
+            required: true,
+            email: true,
+        },
+        "data[User][password]": {
+            required: true,
+            alphanumeric: true,
+            minlength: 8,
+            maxlength: 20,
+        },
+    },
+    messages: {
+        "data[User][username]": {
+            required: "Please enter your email",
+            email: "Please enter valid email"
+        },
+        "data[User][password]": {
+            required: "Please enter Password",
+        },
+    }
+});
+
+    $("input[name='data[Order][type]']:radio").change(function() { 
+        validator.resetForm();
+        var result = $("input[name='data[Order][type]']:checked").val();
+        if(result == 2){
+            $(".float-right input").prop("disabled", false);
+            $(".float-left input").prop("disabled", true);
+            $(".float-left input[name='data[Order][type]']").prop("disabled", false);
+            $(".float-left select").prop("disabled", true);
+            $(".float-right select").prop("disabled", false);
+        } else {
+            $(".float-right input").prop("disabled", true);
+            $(".float-left input").prop("disabled", false);
+            $(".float-right input[name='data[Order][type]']").prop("disabled", false);
+            $(".float-right select").prop("disabled", true);
+            $(".float-left select").prop("disabled", false);
+        }
+    });
+    
+    var validator = $("#GuestDeliverOrdering").validate({
+        rules: {
+            "data[DeliveryAddress][name_on_bell]": {
+                required: true,
+                lettersonly: true,  
+            },
+             "data[DeliveryAddress][address]": {
+                required: true,
+            },
+             "data[DeliveryAddress][city]": {
+                required: true,
+                lettersonly: true, 
+            },
+            "data[DeliveryAddress][state]": {
+               required: true,
+                lettersonly: true, 
+            },
+            "data[DeliveryAddress][zipcode]": { 
+                required: true,
+                number:true,
+                minlength:5,
+                maxlength:6,
+            },"data[DeliveryAddress][phone]": { 
+                required: true,
+                number:true,
+                minlength:10,
+                maxlength:11,
+            }, 
+            "data[DeliveryAddress][email]": { 
+                required: true,
+                email:true,
+                minlength:10,
+                maxlength:50,
+            },  
+            "data[Delivery][pickup_time]": {
+                    required: true,
+            },
+            "data[Delivery][pickup_date]": {
+                required: true,
+            },
+            "data[PickUpAddress][name_on_bell]": {
+                required: true,
+                lettersonly: true,  
+            },
+            "data[PickUpAddress][email]": { 
+                required: true,
+                email:true,
+                minlength:10,
+                maxlength:50,
+            },
+            "data[PickUpAddress][phone]": { 
+                required: true,
+                number:true,
+                minlength:10,
+                maxlength:11,
+            }, 
+            "data[PickUp][pickup_time]": {
+                required: true,
+            },
+            "data[PickUp][pickup_date]": {
+                required: true,
+            },
+        },
+        messages: {
+            "data[DeliveryAddress][name_on_bell]": {
+                required: "Please enter your Name",
+                lettersonly:"Only alphabates allowed",
+            },
+             "data[DeliveryAddress][address]": {
+                required: "Please enter your address",
+            },
+            "data[DeliveryAddress][city]": {
+                required: "Please enter city",
+                 lettersonly:"Only alphabates allowed",
+            },
+            "data[DeliveryAddress][state]": {
+                required: "Please enter state ",
+                 lettersonly:"Only alphabates allowed",
+            },
+            "data[DeliveryAddress][zipcode]": {
+               required: "Please enter zip-code.",
+                number:"Only numbers are allowed"
+            },
+             "data[DeliveryAddress][phone]": {
+                required: "Please enter phone number.",
+                number:"Only numbers are allowed"
+            },
+             "data[DeliveryAddress][email]": {
+                required: "Please enter email",
+                email:"Please enter valid email"
+            },
+            "data[Delivery][pickup_time]": {
+                 required: "Please select pickup time"
+            },
+            "data[Delivery][pickup_date]": {
+                required: "Please enter your pickup date",
+            },
+            "data[PickUpAddress][name_on_bell]": {
+                required: "Please enter your Name",
+                lettersonly:"Only alphabates allowed",
+            },
+             "data[PickUpAddress][phone]": {
+                required: "Please enter phone number.",
+                number:"Only numbers are allowed"
+            },
+             "data[PickUpAddress][email]": {
+                required: "Please enter email",
+                email:"Please enter valid email"
+            },
+            "data[PickUp][pickup_time]": {
+                required: "Please select pickup time"
+            },
+            "data[PickUp][pickup_date]": {
+                required: "Please enter your pickup date",
+            }
+        }
+    });
+    
+    
+    
+    $(document).ready(function(){   
+        $(".float-right input").prop("disabled", true);
+        $(".float-right input[name='data[Order][type]']").prop("disabled", false);
+        $(".float-right select").prop("disabled", true);
+        $('.delivery_pickup_time').css('display','none');
+        $('#DeliveryPickupTime').css('display','none');
+        $('#DeliveryPickupDate').css('display','none');
+        
+        $('.pickup_pickup_time').css('display','none');
+        $('.pickup_pickup_time_now').css('display','block');
+        $('#PickUpPickupTimeNow').css('display','block');
+        $('#PickUpPickupTime').css('display','none');
+        $('#PickUpPickupDate').css('display','none');
+    });
+    
+    $('.date_select').datepicker({
+        dateFormat: 'mm-dd-yy',
+        minDate: 1,
+    });
+
+    $("#DeliveryType1").click(function(){ // To Show
+        $('.delivery_pickup_time').css('display','block');
+        $('#DeliveryPickupTime').css('display','block');
+        $('#DeliveryPickupDate').css('display','block');
+    });
+    $("#DeliveryType0").on('click',function(){// To hide
+        $('.delivery_pickup_time').css('display','none');
+        $('#DeliveryPickupTime').css('display','none');
+        $('#DeliveryPickupDate').css('display','none');
+    });
+    
+    
+    $("#PickUpType1").click(function(){ // To Show
+        $('.pickup_pickup_time').css('display','block');
+        $('.pickup_pickup_time_now').css('display','none');
+        $('#PickUpPickupTimeNow').css('display','none');
+        $('#PickUpPickupTime').css('display','block');
+        $('#PickUpPickupDate').css('display','block');
+    });
+    $("#PickUpType0").on('click',function(){// To hide
+        $('.pickup_pickup_time').css('display','none');
+        $('.pickup_pickup_time_now').css('display','block');
+        $('#PickUpPickupTimeNow').css('display','block');
+        $('#PickUpPickupTime').css('display','none');
+        $('#PickUpPickupDate').css('display','none');
+    });
+    
+    
+    
+</script>
+        <!--                	<div id="slides">
+                                <ul class="slides-container">
+                                <li>
+                        <?php echo $this->Html->image('sliderImages/floor-kid.jpg');?>
+                               
+                                <div class="container">
+                                <h1>Superslides is a fullscreen slider for jQuery.</h1>
+                                <p>
+                                </p>
+                                </div>
+                                </li>
+                                <li>
+                        <?php echo $this->Html->image('sliderImages/building.jpg');?>
+        
+                              
+                                <div class="container">
+                                <h1>It's responsive.</h1>
+                                <div class="contrast">
+                                <p>
+                                img are smartly centered in the viewport. Use your own media queries to control the layout of your content.
+                                </p>
+                                </div>
+                                </div>
+                                </li>
+                                <li>
+                        <?php echo $this->Html->image('sliderImages/girl.jpg');?>
+        
+                               
+                                <div class="container">
+                                <h1>It's hardware accelerated.</h1>
+                                <div class="contrast">
+                                <p>For browsers that support CSS hardware acceleration, tasks, such as animation, are processed by the GPU giving massive performance gains.</p>
+                                </div>
+                                </div>
+                                </li>
+                                <li>
+                            <?php echo $this->Html->image('sliderImages/dog.jpg');?>
+        
+                                
+                                <div class="container">
+                                <h1>It's got a pretty sweet API.</h1>
+                                <div class="contrast">
+                                <p>The control API lets you start, stop, animate, and destroy instances of the slider. You can get the current, next, and previous slides programmatically. In fact, the slider uses the same API internally.</p>
+                                </div>
+                                </div>
+                                </li>
+                                <li>
+                             <?php echo $this->Html->image('sliderImages/hill-climb.jpg');?>
+        
+                               
+                                <div class="container">
+                                <h1>It's tested with QUnit.</h1>
+                                <div class="contrast">
+                                <p>
+                                Version 0.5 was a ground up, TDD rebuild, fixing many quirky bugs and standardizing the event and control APIs.
+                                </p>
+                                </div>
+                                </div>
+                                </li>
+                                <li>
+                        <?php echo $this->Html->image('sliderImages/kids.jpg');?>
+        
+                                
+                                <div class="container">
+                                <h1>It's got popular buzzwords.</h1>
+                                <div class="contrast">
+                                <p>
+                                Thanks for viewing! Read the docs, create an issue, or fix a bug on <a href="https://github.com/nicinabox/superslides/issues">Github</a>.
+                                </p>
+                                <p>
+                                <a href="http://twitter.com/nicinabox">@nicinabox</a> made this. All these photos are by the amazing <a href="http://www.flickr.com/photos/x30mileswest/">Ryan Green</a>.
+                                </p>
+                                </div>
+                                </div>
+                                </li>
+                                </ul>
+                                <nav class="slides-navigation">
+                                <a href="#" class="next">
+                                <i class="icon-chevron-right"></i>
+                                </a>
+                                
+                                <a href="#" class="prev">
+                                <i class="icon-chevron-left"></i>
+                                </a>
+                                </nav>
+                            </div>-->

@@ -1,0 +1,69 @@
+@media screen and (max-width:1180px){
+	.inner-sml-form .coupon-code-box input[type="submit"], .inner-sml-form .coupon-code-box input[type="button"] { float:none; display:block; width:100%;  margin-top:10px; }
+}
+
+@media screen and (max-width:1024px){
+	.online-order .checkbox-listing li { width:100%; padding-bottom:10px; }
+}
+
+@media screen and (max-width:940px){
+	.coupon-code-box .inbox { margin:10px 0; display:block; max-width:100%; width:100%; }
+}
+
+@media screen and (max-width:800px){
+	.inner-sml-form .online-order fieldset { width:100%; } 
+	.online-order .checkbox-listing li { width:50%; }
+        .order-overview-lt, .order-overview-rt { width:100%; }
+        .order-overview-rt { margin-top:30px; }
+}
+
+@media screen and (max-width:768px){
+	.lft-side h2 { font-size:24px;}
+}
+
+@media screen and (max-width:640px){
+	.lft-side,
+	.rgt-side,
+	.rgt-side header .header-input-form,
+	.rgt-side header .banner { width:100%;}
+	.rgt-side { padding-left:0;margin-top:20px;}
+}
+
+@media screen and (max-width:600px){
+    .custom-success-div { float: none; width:100%; margin: 0 auto; }
+}
+
+@media screen and (max-width:480px){
+	.inner-sml-form dl dt,
+	.inner-sml-form dl dd { width:100%;}
+	.main-rgt-content .inner-sml-form { padding:20px;}
+	.inner-sml-form fieldset { padding:20px 20px;}
+	.online-order .checkbox-listing li { width:100%; }
+}
+
+@media screen and (max-width:420px){
+    .special-comment span { width:100%; padding-bottom: 5px;  }
+    .special-comment > div {  margin-left: 0; float: left;  }
+    .inner-sml-form .creditcard-payment dl.reg-wrap dt { width:100%; }
+    .inner-sml-form .creditcard-payment dl.reg-wrap dd { width:100%; }
+}
+
+@media screen and (max-width:384px){
+    .inner-sml-form fieldset .row-divide span { width:49%; margin-bottom:5px; }
+    .item-pic span.price-overlay { font-size:12px; }
+    .inner-sml-form dl.reg-wrap.pickup_time dt, .inner-sml-form dl.reg-wrap.pickup_time dd { width:100%; text-align: left; }
+    .inner-sml-form dl.reg-wrap.pickup_time dt { margin: 0; padding-bottom: 5px; }
+    .inner-sml-form dl.reg-wrap.pickup_time dd { margin: 0 0 10px; }
+    .inner-sml-form fieldset .row-divide span { width:99%; }
+    .inner-sml-form fieldset .payment-method label { display:inline-block; }
+    .inner-sml-form input[type="submit"], .inner-sml-form input[type="button"] { width:100%; margin:0 0 10px; }
+    .success-message { font-size: 20px; }
+}
+
+@media screen and (max-width:360px){
+	
+        .after-login-wrap ul li { width:100%; text-align: center; }
+        .inner-sml-form dl.reg-wrap.md-address dt, .inner-sml-form dl.reg-wrap.md-address dd { width:100%; text-align: left; }.inner-sml-form dl.reg-wrap.pickup_time dt { margin: 0; }
+        .inner-sml-form dl.reg-wrap.md-address dt { margin: 0; }
+        .inner-sml-form dl.reg-wrap.md-address dd { margin: 0 0 15px; }
+}

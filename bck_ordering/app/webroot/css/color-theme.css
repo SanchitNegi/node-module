@@ -1,0 +1,25 @@
+/******************************************** THEME ONE **************************************/
+.theme-one .header-top, 
+	.theme-one .footer { background-color:#583c27; }
+.theme-one .header-top a, 
+	.theme-one .footer a { color:#fff; }
+.theme-one .header-top a:hover, 
+	.theme-one .footer a:hover { text-decoration:underline; }
+.theme-one .header-body,
+	.theme-one .form-layout { background-color:#f6eddc; }
+.theme-one .header-body h1 a {color:#e05b5e; }
+.theme-one .header-body h1 a span { color:#9d9d9d; }
+.theme-one .nav-menu, 
+	.theme-one .form-layout dl dd .inbox, .form-layout .inbox { background:#e8d9bb; }
+.theme-one .nav-menu ul li a:hover, 
+	.theme-one .nav-menu ul li.active a,
+		.theme-one .nav-menu .small-screen-menu:hover { color:#fff; background-color:#e05b5e; }
+.theme-one .form-layout { border-color:#c6aa74; }
+.theme-one .form-layout h2 span { background:#e05b5e; color:#fff; }
+.theme-one .form-layout dl dd .inbox, .form-layout .inbox { border-color:rgba(88,60,39,0.4); }
+.theme-one .green-btn { background-color:#aacdaa; border-color:#396e39; color:#396e39; }
+.theme-one .nav-menu .small-screen-menu { color:#777; }
+
+@media all and ( max-width: 700px) {
+	.theme-one .nav-menu ul { background-color:rgba(232,217,187,0.9); }
+}

@@ -1,0 +1,84 @@
+<?php echo $this->Html->script('ckeditor/ckeditor');?>
+    <div class="row">
+            <div class="col-lg-6">
+                <h3>Add Newsletter</h3> 
+                <?php echo $this->Session->flash();?>   
+            </div> 
+            <div class="col-lg-6">                        
+                <div class="addbutton">                
+                        <?php //echo $this->Html->link('Back','/admin/admins/dashboard/',array('title' => 'Back'));?>
+                </div>
+            </div>
+    </div>   
+    <div class="row">        
+            <?php echo $this->Form->create('Newsletter', array('inputDefaults' => array('label' => false, 'div'=>false, 'required' => false, 'error' => false, 'legend' => false,'autocomplete' => 'off'),'id'=>'NewsletterAdd'));?>
+        <div class="col-lg-6">            
+	    
+	    
+	   <div class="form-group form_margin">		 
+                <label>Subject<span class="required"> * </span></label>               
+              
+		<?php echo $this->Form->input('Newsletter.subject',array('type'=>'text','class'=>'form-control valid','placeholder'=>'Enter Type','label'=>'','div'=>false));
+                  echo $this->Form->error('Newsletter.subject'); ?>
+            </div>
+             <br>
+	    <div class="form-group form_spacing">
+                <label>Body</label> 
+                <?php echo $this->Form->textarea('Newsletter.body',array('class'=>'ckeditor'));
+		echo $this->Form->error('Newsletter.body');
+		?>
+                 </div>  
+	    <div class="form-group form_margin">
+                <label>Status<span class="required"> * </span></label>                
+               &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                <?php    
+                echo $this->Form->input('Newsletter.is_active', array(
+  'type' => 'radio',
+  'options' => array('1' => 'Active&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', '0' => 'Inactive') ,
+  'default'=>1
+));
+                echo $this->Form->error('Newsletter.is_active');
+                   ?>
+            </div>
+            
+	    
+
+             <?php //if($seasonalpost){ $display="style='display:block;'";}else{$display="style='display:none;'";}?>
+
+	       	       
+ 
+	  
+            <?php echo $this->Form->button('Save', array('type' => 'submit','class' => 'btn btn-default'));?>             
+            <?php echo $this->Html->link('Cancel', "/newsletters/newsletterList/", array("class" => "btn btn-default",'escape' => false)); ?>
+        </div>
+        <?php echo $this->Form->end(); ?>
+    </div><!-- /.row -->
+    
+    
+    <script>
+    $(document).ready(function() {
+	
+	    $("#NewsletterAdd").validate({
+            
+            rules: {
+                "data[Newsletter][subject]": {
+                    required: true, 
+                },
+		"data[Newsletter][body]": {
+                    required: true,
+                },
+                
+            },
+            messages: {
+                "data[Newsletter][subject]": {
+                    required: "Please enter subject",
+                },
+                 "data[Newsletter][body]": {
+                    required: "Please enter body",
+                },
+            }
+        });
+           
+            
+    });
+</script>
